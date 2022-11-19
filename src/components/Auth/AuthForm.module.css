@@ -7,6 +7,7 @@
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   padding: 1rem;
   text-align: center;
+  color: white;
 }
 
 .auth h1 {
@@ -59,7 +60,8 @@
 }
 
 .actions .toggle {
-  margin-top: 1rem;
+  margin-top: 2rem;
+  
   background-color: transparent;
   color: #f56b0a;
   border: none;
@@ -70,4 +72,23 @@
 .actions .toggle:hover {
   background-color: transparent;
   color: #ae82cc;
+}
+
+.extrabutton {
+  background-color: transparent;
+  color: #f56b0a;
+  border: none;
+  padding: 0.15rem 1.5rem;
+  margin-top: 10px;
+}
+
+.forgot {
+  cursor: pointer;
+  font: inherit;
+  color: white;
+  background-color: #9f5ccc;
+  border: 1px solid #9f5ccc;
+  border-radius: 4px;
+  padding: 0.5rem 2.5rem;
+  margin-top: 10px;
 }
