@@ -15,7 +15,7 @@ function App() {
     <Fragment>
       <Switch>
         {!isLoggedIn && (
-          <Route path="/auth">
+          <Route path="/auth" exact>
             <AuthPage />
           </Route>
         )}

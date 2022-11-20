@@ -7,6 +7,7 @@ const Profile = () => {
   const authCtx = useContext(AuthContext);
   const nameInputref = useRef();
   const profileInuputRef = useRef();
+
   fetch(
     "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyD5IFGkNB01Wj6dWDO0OCDi3RhyZ2ReLjA",
     {
@@ -18,7 +19,30 @@ const Profile = () => {
         "Content-Type": "application/json",
       },
     }
-  );
+  )
+    .then((res) => {
+      if (res.ok) {
+        //...
+        return res.json();
+      } else {
+        //...
+        return res.json().then((data) => {
+          // show an error modal
+          let eroorMessage = "Authentication failed";
+          // if (data && data.error && data.error.message) {
+          //   eroorMessage = data.error.message;
+          // }
+
+          throw new Error(eroorMessage);
+        });
+      }
+    })
+    .then((data) => {
+      authCtx.login(data.idToken);
+    })
+    .catch((err) => {
+      alert(err.message);
+    });
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -32,16 +56,39 @@ const Profile = () => {
       {
         method: "POST",
         body: JSON.stringify({
+          idToken: authCtx.token,
           displayName: enteredName,
           photoUrl: enteredProfile,
-          idToken: authCtx.token,
           returnSecureToken: true,
         }),
         headers: {
           "Content-Type": "application/json",
         },
       }
-    );
+    )
+      .then((res) => {
+        if (res.ok) {
+          //...
+          return res.json();
+        } else {
+          //...
+          return res.json().then((data) => {
+            // show an error modal
+            let eroorMessage = "Authentication failed";
+            // if (data && data.error && data.error.message) {
+            //   eroorMessage = data.error.message;
+            // }
+
+            throw new Error(eroorMessage);
+          });
+        }
+      })
+      .then((data) => {
+        authCtx.login(data.idToken);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
   };
 
   return (
@@ -54,7 +101,7 @@ const Profile = () => {
         </span>
       </div>
 
-      <sec className={classes.form}>
+      <section className={classes.form}>
         <h1>contact Details</h1>
         <form onSubmit={submitHandler}>
           <label>Your Full Name</label>
@@ -63,7 +110,7 @@ const Profile = () => {
           <input type="url" ref={profileInuputRef} />
           <button className={classes.btn1}>Update</button>
         </form>
-      </sec>
+      </section>
     </Fragment>
   );
 };
