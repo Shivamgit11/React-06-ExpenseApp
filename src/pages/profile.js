@@ -1,10 +1,25 @@
-import { Fragment, useRef } from "react";
+import { Fragment, useContext, useRef } from "react";
+import AuthContext from "../store/auth-context";
 
 import classes from "./Profile.module.css";
 
-const Profile = (props) => {
+const Profile = () => {
+  const authCtx = useContext(AuthContext);
   const nameInputref = useRef();
   const profileInuputRef = useRef();
+  fetch(
+    "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyD5IFGkNB01Wj6dWDO0OCDi3RhyZ2ReLjA",
+    {
+      method: "POST",
+      body: JSON.stringify({
+        idToken: authCtx.token,
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
+  );
+
   const submitHandler = (event) => {
     event.preventDefault();
 
@@ -19,7 +34,7 @@ const Profile = (props) => {
         body: JSON.stringify({
           displayName: enteredName,
           photoUrl: enteredProfile,
-          idToken: props.token,
+          idToken: authCtx.token,
           returnSecureToken: true,
         }),
         headers: {
@@ -28,6 +43,7 @@ const Profile = (props) => {
       }
     );
   };
+
   return (
     <Fragment>
       <div className={classes.header}>
