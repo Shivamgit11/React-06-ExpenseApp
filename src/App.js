@@ -1,25 +1,34 @@
-import { Switch, Route } from 'react-router-dom';
-
-import Layout from './components/Layout/Layout';
-import UserProfile from './components/Profile/UserProfile';
-import AuthPage from './pages/AuthPage';
-import HomePage from './pages/HomePage';
+import { Fragment, useContext } from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
+import AuthPage from "./pages/AuthPage";
+import Profile from "./pages/profile";
+import Welcome from "./pages/WelcomeExpense";
+import AuthContext from "./store/auth-context";
 
 function App() {
+  const authCtx = useContext(AuthContext);
+
+  const isLoggedIn = authCtx.isLoggedIn;
+
   return (
-    <Layout>
+    // {!isLoggedIn && (<AuthPage />) }
+    <Fragment>
       <Switch>
-        <Route path='/' exact>
-          <HomePage />
+        {!isLoggedIn && (
+          <Route path="/auth">
+            <AuthPage />
+          </Route>
+        )}
+
+        {isLoggedIn && <Redirect to="/welcome" />}
+        <Route path="/welcome" exact>
+          <Welcome />
         </Route>
-        <Route path='/auth'>
-          <AuthPage />
-        </Route>
-        <Route path='/profile'>
-          <UserProfile />
+        <Route path="/profile">
+            <Profile />
         </Route>
       </Switch>
-    </Layout>
+    </Fragment>
   );
 }
 
