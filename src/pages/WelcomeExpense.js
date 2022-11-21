@@ -9,6 +9,7 @@ const Welcome = () => {
    const history = useHistory();
 
    const logoutHandler = () => {
+    authCtx.logout();
     localStorage.removeItem('idToken');
     history.replace('/auth');
    }

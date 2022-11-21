@@ -1,4 +1,5 @@
 import { useRef, useState, useContext } from "react";
+import { Link, Redirect } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
 
 import classes from "./AuthForm.module.css";
@@ -9,13 +10,18 @@ const AuthForm = () => {
   const emailInputref = useRef();
   const passwordInputref = useRef();
 
+  const [loginState, setlogingState] = useState(false);
+
   const authCtx = useContext(AuthContext);
+
+  
 
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
   };
 
   const submitHandler = (event) => {
+    
     event.preventDefault();
 
     const enteredEmail = emailInputref.current.value;
@@ -45,6 +51,7 @@ const AuthForm = () => {
       .then((res) => {
         setisLoading(false);
         if (res.ok) {
+          
           //...
           return res.json();
         } else {
@@ -61,7 +68,9 @@ const AuthForm = () => {
         }
       })
       .then((data) => {
+        console.log(data);
         authCtx.login(data.idToken);
+        setlogingState(true);
       })
       .catch((err) => {
         alert(err.message);
@@ -70,6 +79,7 @@ const AuthForm = () => {
 
   return (
     <section className={classes.auth}>
+      {loginState && <Redirect to='/welcome' />}
       <h1>{isLogin ? "Login" : "Sign Up"}</h1>
       <form onSubmit={submitHandler}>
         <div className={classes.control}>
@@ -91,7 +101,10 @@ const AuthForm = () => {
           )}
           {isLoading && <p>Sending Request....</p>}
         </div>
+        <Link to="/forgot-password">
         <button className={classes.extrabutton}>forgot Password</button>
+        </Link>
+        
       </form>
       <button
         type="button"

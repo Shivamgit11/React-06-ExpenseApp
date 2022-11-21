@@ -28,7 +28,7 @@ const Profile = () => {
         //...
         return res.json().then((data) => {
           // show an error modal
-          let eroorMessage = "Authentication failed";
+          let eroorMessage = "Unable to fetch please add name and url";
           // if (data && data.error && data.error.message) {
           //   eroorMessage = data.error.message;
           // }
@@ -74,7 +74,7 @@ const Profile = () => {
           //...
           return res.json().then((data) => {
             // show an error modal
-            let eroorMessage = "Authentication failed";
+            let eroorMessage = "Some issue";
             // if (data && data.error && data.error.message) {
             //   eroorMessage = data.error.message;
             // }
@@ -85,6 +85,7 @@ const Profile = () => {
       })
       .then((data) => {
         authCtx.login(data.idToken);
+        console.log("update workin")
       })
       .catch((err) => {
         alert(err.message);
