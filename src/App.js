@@ -1,4 +1,4 @@
-import { Fragment, useContext } from "react";
+import { useContext } from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
 import AuthPage from "./pages/AuthPage";
 import Profile from "./pages/profile";
@@ -12,8 +12,12 @@ function App() {
 
   return (
     // {!isLoggedIn && (<AuthPage />) }
-    <Fragment>
+    <main>
       <Switch>
+      {/* <Route path="/" exact>
+            <AuthPage />
+          </Route> */}
+          
         {!isLoggedIn && (
           <Route path="/auth" exact>
             <AuthPage />
@@ -28,7 +32,7 @@ function App() {
             <Profile />
         </Route>
       </Switch>
-    </Fragment>
+    </main>
   );
 }
 

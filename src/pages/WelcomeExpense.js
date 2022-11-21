@@ -1,10 +1,19 @@
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import AuthContext from "../store/auth-context";
 import classes from "./Welcome.css";
 
 const Welcome = () => {
-   const authCtx = useContext(AuthContext)
+   const authCtx = useContext(AuthContext);
+
+   const history = useHistory();
+
+   const logoutHandler = () => {
+    localStorage.removeItem('idToken');
+    history.replace('/auth');
+   }
+
+
   
     const verifyHandler = () => {
         alert("verification email sent to your email");
@@ -52,6 +61,7 @@ const Welcome = () => {
         <NavLink to="/profile">...Complete Now</NavLink>
       </div>
       <button onClick={verifyHandler}>Verify Your Email</button>
+      <button onClick={logoutHandler}>Logout</button>
     </header>
   );
 };
