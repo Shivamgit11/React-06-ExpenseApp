@@ -9,7 +9,7 @@ const Profile = () => {
   const profileInuputRef = useRef();
 
   fetch(
-    "https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=AIzaSyD5IFGkNB01Wj6dWDO0OCDi3RhyZ2ReLjA",
+    "https://identitytoolkit.googleapis.com/v1/accounts:update?key=AIzaSyD5IFGkNB01Wj6dWDO0OCDi3RhyZ2ReLjA",
     {
       method: "POST",
       body: JSON.stringify({

@@ -6,6 +6,7 @@ import Private from "./pages/PrivateRoute";
 import Profile from "./pages/profile";
 import Welcome from "./pages/WelcomeExpense";
 import AuthContext from "./store/auth-context";
+import ExpenseFirstUI from "./Expense/ExpenseForm";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -19,6 +20,10 @@ function App() {
       <Switch>
         <Route path="/" exact>
           <Private />
+        </Route>
+
+        <Route path="/Expense">
+          <ExpenseFirstUI />
         </Route>
 
         <Route path="/auth" exact>

@@ -12,7 +12,7 @@ const Private = () => {
     <div>
       {!checkLoggedIN && <Redirect to='/auth' />}
 
-      {checkLoggedIN && <Redirect to='/welcome' />}
+      {checkLoggedIN && <Redirect to='/Expense' />}
     </div>
   );
 };
