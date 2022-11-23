@@ -5,6 +5,7 @@ import AuthContext from "../../store/auth-context";
 import classes from "./AuthForm.module.css";
 
 const AuthForm = () => {
+  console.log("insideAuth");
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setisLoading] = useState();
   const emailInputref = useRef();
@@ -79,7 +80,7 @@ const AuthForm = () => {
 
   return (
     <section className={classes.auth}>
-      {loginState && <Redirect to='/welcome' />}
+      {loginState && <Redirect to='/expense' />}
       <h1>{isLogin ? "Login" : "Sign Up"}</h1>
       <form onSubmit={submitHandler}>
         <div className={classes.control}>

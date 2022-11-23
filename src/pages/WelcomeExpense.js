@@ -4,6 +4,7 @@ import AuthContext from "../store/auth-context";
 import classes from "./Welcome.css";
 
 const Welcome = () => {
+  console.log("welcomn");
    const authCtx = useContext(AuthContext);
 
    const history = useHistory();

@@ -6,7 +6,7 @@ import Private from "./pages/PrivateRoute";
 import Profile from "./pages/profile";
 import Welcome from "./pages/WelcomeExpense";
 import AuthContext from "./store/auth-context";
-import ExpenseFirstUI from "./Expense/ExpenseForm";
+import ExpenseFirstUI from "./Expense/Expenses";
 
 function App() {
   const authCtx = useContext(AuthContext);
@@ -22,15 +22,15 @@ function App() {
           <Private />
         </Route>
 
-        <Route path="/Expense">
+        <Route path="/expense" exact>
           <ExpenseFirstUI />
         </Route>
 
-        <Route path="/auth" exact>
+        <Route path="/auth">
           <AuthPage />
         </Route>
 
-        <Route path="/welcome" exact>
+        <Route path="/welcome">
           <Welcome />
         </Route>
         <Route path="/profile">
